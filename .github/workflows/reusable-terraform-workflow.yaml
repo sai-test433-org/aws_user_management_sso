@@ -6,7 +6,7 @@ on:
       role-to-assume:
         description: 'IAM Role to assume'
         required: false
-        default: 'default-role'
+        default: 'arn:aws:iam::945436036260:role/oidc-terraform-deployment'
   push:
     branches:
       - main
