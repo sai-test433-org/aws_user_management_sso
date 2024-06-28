@@ -1,0 +1,40 @@
+name: 'terraform-ci'
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+      - main
+      - develop
+  workflow_call:
+
+env:
+  AWS_region: "us-east-1"
+
+permissions:
+  id-token: write # for OIDC
+  contexts: read #for checkout
+
+jobs:
+  terraform-ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: clone the repo
+        uses: actions/checkout@3
+      
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.role-to-assume }} #create a variable used by the role
+          role-session-name: terraform_deployment
+          aws-region: ${{ env.AWS_region }}
+
+      - run: |
+          echo "Connection with AWS is successful. running the workflow with role: ${{ vars.role-to-assume }}"
+
+      - name: test aws setup
+        run: |
+          aws s3 ls
