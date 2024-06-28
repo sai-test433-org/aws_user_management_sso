@@ -79,7 +79,7 @@ data "aws_ssoadmin_permission_set" "example" {
 }
 
 data "aws_identitystore_group" "example" {
-  identity_store_id = "arn:aws:sso:::instance/ssoins-722312b6e3f7713f"
+  identity_store_id = "d-9067e37c95"
 
   alternate_identifier {
     unique_attribute {
