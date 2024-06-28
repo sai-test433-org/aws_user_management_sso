@@ -78,23 +78,13 @@ data "aws_ssoadmin_permission_set" "example" {
   name         = "AWSReadOnlyAccess"
 }
 
-data "aws_identitystore_group" "example" {
-  identity_store_id = "d-9067e37c95"
-
-  alternate_identifier {
-    unique_attribute {
-      attribute_path  = "DisplayName"
-      attribute_value = "ExampleGroup"
-    }
-  }
-}
 
 
 resource "aws_ssoadmin_account_assignment" "example" {
   instance_arn       = "arn:aws:sso:::instance/ssoins-722312b6e3f7713f"
   permission_set_arn = data.aws_ssoadmin_permission_set.example.arn
 
-  principal_id   = data.aws_identitystore_group.example.group_id
+  principal_id   = aws_identitystore_group.test_group.group_id
   principal_type = "GROUP"
 
   target_id   = "590184113190"
