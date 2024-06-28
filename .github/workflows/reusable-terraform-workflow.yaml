@@ -2,6 +2,11 @@ name: 'terraform-ci'
 
 on:
   workflow_dispatch:
+    inputs:
+      role-to-assume:
+        description: 'IAM Role to assume'
+        required: false
+        default: 'default-role'
   # push:
   #   branches:
   #     - main
