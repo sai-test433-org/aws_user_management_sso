@@ -29,15 +29,15 @@ resource "aws_identitystore_group_membership" "test_group_membership" {
 }
 
 # Create a Permission Set with Admin permissions
-resource "aws_ssoadmin_permission_set" "admin_permission_set" {
-  instance_arn = "arn:aws:sso:::instance/ssoins-722312b6e3f7713f"  # Replace with your SSO instance ARN
-  name         = "AdminPermissionSet"
-  description  = "Admin permission set"
+# resource "aws_ssoadmin_permission_set" "admin_permission_set" {
+#   instance_arn = "arn:aws:sso:::instance/ssoins-722312b6e3f7713f"  # Replace with your SSO instance ARN
+#   name         = "AdminPermissionSet"
+#   description  = "Admin permission set"
 
-  managed_policies = [
-    "arn:aws:iam::aws:policy/AdministratorAccess"
-  ]
-}
+#   managed_policies = [
+#     "arn:aws:iam::aws:policy/AdministratorAccess"
+#   ]
+# }
 
 # Assign the Permission Set to the User
 # resource "aws_ssoadmin_account_assignment" "user_admin_assignment" {
