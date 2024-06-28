@@ -33,9 +33,20 @@ jobs:
           role-session-name: terraform_deployment
           aws-region: ${{ env.AWS_region }}
 
-      - run: |
-          echo "Connection with AWS is successful. running the workflow with role:"
-
       - name: test aws setup
         run: |
           aws s3 ls
+
+      - name: Setting up terraform
+        uses: hashicorp/setup-terraform@v2
+
+      - name: Terraform Init
+        id: init
+        run: terraform init
+
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan
+
+      - name: Terraform apply
+        run: terraform apply -auto-approve
