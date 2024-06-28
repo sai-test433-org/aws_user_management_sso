@@ -2,17 +2,17 @@ name: 'terraform-ci'
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-      - develop
+  # push:
+  #   branches:
+  #     - main
+  #     - develop
 
 env:
   AWS_region: "us-east-1"
 
 permissions:
   id-token: write # for OIDC
-  contexts: read #for checkout
+  # contexts: read #for checkout
 
 jobs:
   terraform-ci:
