@@ -7,10 +7,10 @@ on:
         description: 'IAM Role to assume'
         required: false
         default: 'default-role'
-  # push:
-  #   branches:
-  #     - main
-  #     - develop
+  push:
+    branches:
+      - main
+      - develop
 
 env:
   AWS_region: "us-east-1"
