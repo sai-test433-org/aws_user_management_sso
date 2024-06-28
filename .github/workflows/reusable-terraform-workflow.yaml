@@ -9,7 +9,6 @@ on:
   pull_request:
       - main
       - develop
-  workflow_call:
 
 env:
   AWS_region: "us-east-1"
