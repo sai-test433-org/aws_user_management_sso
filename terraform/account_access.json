@@ -1,7 +1,17 @@
-[
+  [
     {
       "group_name": "Test Group",
-      "permission_set_name": "AWSReadOnlyAccess",
+      "permission_sets": [
+        {
+          "name": "AWSReadOnlyAccess",
+          "managed": true
+        },
+        {
+          "name": "S3ReadFullAccess",
+          "managed": false
+        }
+      ],
       "account_id": "590184113190"
     }
   ]
+  

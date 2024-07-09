@@ -13,6 +13,24 @@ locals {
       }
     ]
   ])
+
+  flattened_access = flatten([
+    for access in local.account_access : [
+      for permission_set in access.permission_sets : {
+        group_name     = access.group_name
+        permission_set = permission_set
+        account_id     = access.account_id
+      }
+    ]
+  ])
+    permission_set = [
+    for ps in local.flattened_access :
+    {
+      name    = ps.permission_set.name
+      managed = ps.permission_set.managed
+    }
+  ]
+
 }
 
 # Create IAM Identity Center users
@@ -35,52 +53,6 @@ resource "aws_identitystore_group" "groups" {
   identity_store_id = "d-9067e37c95" # Replace with your Identity Store ID
   display_name      = each.key
 }
-
-# Add users to groups
-# resource "aws_identitystore_group_membership" "group_memberships" {
-#   for_each = { for group in local.group_memberships : "${group.group_name}-${join(",", group.users)}" => {
-#     group_name = group.group_name,
-#     users      = group.users
-#   } }
-
-#   identity_store_id = "d-9067e37c95"  # Replace with your Identity Store ID
-#   group_id          = aws_identitystore_group.groups[each.value.group_name].group_id
-
-#   # Assign member_ids as a list of strings
-# #   member_id         = [for user in each.value.users : aws_identitystore_user.users[user].user_id]
-#     # member_id = flatten([for user in each.value.users : [aws_identitystore_user.users[user].user_id]])
-#     member_id = []
-#   depends_on = [
-#     aws_identitystore_group.groups,
-#     aws_identitystore_user.users
-#   ]
-# }
-
-## Add users to groups
-#resource "aws_identitystore_group_membership" "group_memberships" {
-#  for_each = { for group in local.group_memberships : "${group.group_name}-${user}" => user for user in group.users }
-#
-#  identity_store_id = "d-9067e37c95"  # Replace with your Identity Store ID
-#  group_id          = aws_identitystore_group.groups[each.value.group_name].group_id
-#  member_id         = aws_identitystore_user.users[each.value].user_id
-#
-#  depends_on = [
-#    aws_identitystore_group.groups,
-#    aws_identitystore_user.users
-#  ]
-#}
-
-
-
-
-# # Create IAM Identity Center group memberships
-# resource "aws_identitystore_group_membership" "group_memberships" {
-#   for_each = toset([for group in local.group_memberships, user in group.users : "${group.group_name}-${user}"])
-
-#   identity_store_id = "d-9067e37c95"  # Replace with your Identity Store ID
-#   group_id          = aws_identitystore_group.groups[split("-", each.key)[0]].id
-#   member_id         = aws_identitystore_user.users[split("-", each.key)[1]].id
-# }
 
 resource "aws_identitystore_group_membership" "group_memberships" {
   for_each = {
