@@ -4,33 +4,6 @@
 locals {
   users             = jsondecode(file("${path.module}/users.json"))
   group_memberships = jsondecode(file("${path.module}/user_groups.json"))
-  account_access    = jsondecode(file("${path.module}/account_access.json"))
-  flattened_memberships = flatten([
-    for group in local.group_memberships : [
-      for user in group.users : {
-        group_name = group.group_name
-        user_name  = user
-      }
-    ]
-  ])
-
-  flattened_access = flatten([
-    for access in local.account_access : [
-      for permission_set in access.permission_sets : {
-        group_name     = access.group_name
-        permission_set = permission_set
-        account_id     = access.account_id
-      }
-    ]
-  ])
-    permission_set = [
-    for ps in local.flattened_access :
-    {
-      name    = ps.permission_set.name
-      managed = ps.permission_set.managed
-    }
-  ]
-
 }
 
 # Create IAM Identity Center users

@@ -1,0 +1,75 @@
+[
+    {
+      "name": "S3ReadFullAccess",
+      "managed": false,
+      "inline_policies": [
+        {
+          "Version": "2012-10-17",
+          "Statement": [
+              {
+                  "Effect": "Allow",
+                  "Action": [
+                      "s3:GetObject",
+                      "s3:PutObject"
+                  ],
+                  "Resource": [
+                      "arn:aws:s3:::portal.rbcore.co.uk/*",
+                      "arn:aws:s3:::portaldev.rbcore.co.uk/*",
+                      "arn:aws:s3:::portaltest.rbcore.co.uk/*"
+                  ]
+              },
+              {
+                  "Sid": "BucketLevelPermissions",
+                  "Effect": "Allow",
+                  "Action": [
+                      "s3:ListBucket"
+                  ],
+                  "Resource": [
+                      "arn:aws:s3:::portal.rbcore.co.uk",
+                      "arn:aws:s3:::portaldev.rbcore.co.uk",
+                      "arn:aws:s3:::portaltest.rbcore.co.uk"
+                  ]
+              }
+          ]
+      }
+      ]
+    },
+    {
+      "name": "CustomPolicy",
+      "managed": false,
+      "inline_policies": [
+        {
+          "Version": "2012-10-17",
+          "Statement": [
+              {
+                  "Effect": "Allow",
+                  "Action": [
+                      "s3:GetObject",
+                      "s3:PutObject"
+                  ],
+                  "Resource": [
+                      "arn:aws:s3:::portal.rbcore.co.uk/*",
+                      "arn:aws:s3:::portaldev.rbcore.co.uk/*",
+                      "arn:aws:s3:::portaltest.rbcore.co.uk/*"
+                  ]
+              },
+              {
+                  "Sid": "BucketLevelPermissions",
+                  "Effect": "Allow",
+                  "Action": [
+                      "s3:ListBucket"
+                  ],
+                  "Resource": [
+                      "arn:aws:s3:::portal.rbcore.co.uk",
+                      "arn:aws:s3:::portaldev.rbcore.co.uk",
+                      "arn:aws:s3:::portaltest.rbcore.co.uk"
+                  ]
+              }
+          ]
+      }
+      ]
+    },{
+    "name": "AWSAdministratorAccess",
+      "managed": true}
+    
+  ]

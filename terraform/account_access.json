@@ -3,7 +3,7 @@
       "group_name": "Test Group",
       "permission_sets": [
         {
-          "name": "AWSReadOnlyAccess",
+          "name": "AWSAdministratorAccess",
           "managed": true
         },
         {
