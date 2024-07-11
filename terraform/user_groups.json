@@ -1,6 +1,8 @@
 [
-    {
-      "group_name": "Test Group",
-      "users": ["sai_test", "sai_test_2"]
-    }
-  ]
+  {
+    "group_name": "test_group",
+    "users": [
+      "test_user_name"
+    ]
+  }
+]

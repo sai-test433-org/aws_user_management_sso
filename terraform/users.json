@@ -1,13 +1,9 @@
-[{
-      "user_name": "sai_test",
-      "display_name": "Sai Test",
-      "family_name": "Test",
-      "given_name": "Sai"
-},
-{
-    "user_name": "sai_test_2",
-    "display_name": "Sai Test",
-    "family_name": "Test",
-    "given_name": "Sai"
-}
+[
+    {
+        "user_name": "test_user_name",
+        "display_name": "test_display_name",
+        "given_name": "test_given_name",
+        "family_name": "test_family_name",
+        "email": "testmail@somemail.com"
+    }
 ]

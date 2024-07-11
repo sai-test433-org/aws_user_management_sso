@@ -11,8 +11,11 @@ resource "aws_identitystore_user" "users" {
   user_name         = each.value.user_name
   display_name      = each.value.display_name
   name {
-    family_name = each.value.family_name
     given_name  = each.value.given_name
+    family_name = each.value.family_name
+  }
+  emails {
+    value = each.value.email
   }
 }
 

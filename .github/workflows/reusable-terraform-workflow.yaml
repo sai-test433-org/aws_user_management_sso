@@ -37,9 +37,6 @@ jobs:
           role-session-name: terraform_deployment
           aws-region: ${{ env.AWS_region }}
 
-      - name: test aws setup
-        run: |
-          aws s3 ls
 
       - name: Setting up terraform
         uses: hashicorp/setup-terraform@v2
