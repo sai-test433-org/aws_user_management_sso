@@ -1,6 +1,3 @@
-# data "aws_ssoadmin_instances" "example" {}
-
-
 locals {
   users             = jsondecode(file("${path.module}/users.json"))
   group_memberships = jsondecode(file("${path.module}/user_groups.json"))
