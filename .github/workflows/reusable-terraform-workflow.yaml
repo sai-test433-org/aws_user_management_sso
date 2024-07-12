@@ -49,33 +49,29 @@ jobs:
         id: init
         run: terraform init
 
-      - name: Terraform Plan
+      - run: terraform plan -out tfplan
         id: plan
-        run: terraform plan -out tfplan
-
-      - name: terraform show plan
+      
+      - run: terraform show -no-color tfplan
         id: show
-        run: terraform show -no-color tfplan
-
-      - name: output plan to github PR
-        if: github.event_name == 'pull_request'
-        uses: actions/github-script@v6
+      
+      - uses: actions/github-script@v6
         env:
-          PLAN: "terraform\n${{ steps.show.output.stdout}}"
+          PLAN: ${{ steps.show.outputs.stdout }}
         with:
           script: |
             const output = `#### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
-        
+              
             <details><summary>Show Plan</summary>
-
+      
             \`\`\`\n
             ${process.env.PLAN}
             \`\`\`
-
+      
             </details>
-
+      
             *Pushed by: @${{ github.actor }}, Action: \`${{ github.event_name }}\`*`;
-
+      
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
