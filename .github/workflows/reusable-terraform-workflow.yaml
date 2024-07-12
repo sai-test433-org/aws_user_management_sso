@@ -37,7 +37,7 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: "arn:aws:iam::${{ vars.AWS_Account_number }}:role/${{vars.ROLE_TO_ASSUME}}" #create a variable used by the role
+          role-to-assume: "arn:aws:iam::${{vars.AWS_ACCOUNT_NUMBER}}:role/${{vars.ROLE_TO_ASSUME}}" #create a variable used by the role
           role-session-name: terraform_deployment
           aws-region: ${{ env.AWS_region }}
 
