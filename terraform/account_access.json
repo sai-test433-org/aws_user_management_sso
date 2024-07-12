@@ -1,6 +1,6 @@
 [
   {
-    "group_name": "Test Group",
+    "group_name": "test_group",
     "permission_sets": [
       {
         "name": "AWSAdministratorAccess",
