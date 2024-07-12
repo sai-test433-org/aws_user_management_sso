@@ -7,6 +7,10 @@ on:
         description: 'IAM Role to assume'
         required: false
         default: 'arn:aws:iam::945436036260:role/oidc-terraform-deployment'
+
+  pull_request:
+    branches:
+      - main
   push:
     branches:
       - main
