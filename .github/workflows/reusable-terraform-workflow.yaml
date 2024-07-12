@@ -37,7 +37,7 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: "arn:aws:iam::945436036260:role/oidc-terraform-deployment" #create a variable used by the role
+          role-to-assume: "arn:aws:iam::${{ vars.AWS_Account_number }}:role/${{ vars.role-to-assume }}" #create a variable used by the role
           role-session-name: terraform_deployment
           aws-region: ${{ env.AWS_region }}
 
@@ -54,4 +54,5 @@ jobs:
         run: terraform plan
 
       - name: Terraform apply
+        if: ${{(github.ref_name == 'main' && github.event.pull_request.merged == true)}}
         run: terraform apply -auto-approve
