@@ -62,7 +62,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           result-encoding: string
           script: |
-            const output = const output = `
+            const output = `
             <details><summary>Show Plan</summary>
             \`\`\`\n
             ${process.env.PLAN}
