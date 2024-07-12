@@ -51,13 +51,17 @@ jobs:
 
       - name: Terraform Plan
         id: plan
-        run: terraform plan -input=false
+        run: terraform plan -out tfplan
+
+      - name: terraform show plan
+        id: show
+        run: terraform show -no-color tfplan
 
       - name: output plan to github PR
         if: github.event_name == 'pull_request'
         uses: actions/github-script@v6
         env:
-          PLAN: "terraform\n${{ steps.pla.output.stdout}}"
+          PLAN: "terraform\n${{ steps.show.output.stdout}}"
         with:
           script: |
             const output = `#### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
