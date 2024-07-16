@@ -1,0 +1,16 @@
+[
+  {
+    "group_name": "test_group",
+    "permission_sets": [
+      {
+        "name": "AWSAdministratorAccess",
+        "managed": true
+      },
+      {
+        "name": "S3FullAccess",
+        "managed": false
+      }
+    ],
+    "account_id": "590184113190"
+  }
+]
