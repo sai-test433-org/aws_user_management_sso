@@ -49,36 +49,9 @@ jobs:
         id: init
         run: terraform init
 
-      - run: terraform plan -out tfplan
+      - run: terraform plan
         id: plan
       
-      - run: terraform show -no-color tfplan
-        id: show
-      
-      - uses: actions/github-script@v6
-        env:
-          PLAN: ${{ steps.show.outputs.stdout }}
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          result-encoding: string
-          script: |
-            const output = `
-            <details><summary>Show Plan</summary>
-            \`\`\`\n
-            ${process.env.PLAN}
-            \`\`\`
-            </details>
-            `;
-          
-      
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: output
-            })`
-
-
       - name: Terraform apply
         if: ${{(github.ref_name == 'main' && github.event.pull_request.merged == true)}}
         run: terraform apply -auto-approve
