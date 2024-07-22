@@ -1,0 +1,17 @@
+name: Get Commit User
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  print-actor:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      
+      - name: Print GitHub Actor
+        run: echo "The user who committed the code is: ${{ github.actor }}"
