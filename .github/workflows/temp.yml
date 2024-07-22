@@ -13,4 +13,5 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
       
-      - run: echo "The user who committed the code is: ${{ github.actor }}"
+      - run: |
+            echo "The user who committed the code is: ${{ github.actor }}"
